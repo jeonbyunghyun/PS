@@ -3,19 +3,22 @@ input = sys.stdin.readline
 
 T = int(input())
 
-for _ in range(T) :
-    fuck = input()
-    stack = list()
-    for i in range(len(fuck)) :
-        if ( fuck[i] == "(" ):
-            stack.append(1)
-        elif( fuck[i] == ")"):
-            if (len(stack) == 0):
-                stack.append(1)
-                break
-            else :
+for _ in range(T):
+    stack = []
+    input_datas = input().rstrip()
+    is_possible = True
+    
+    for data in input_datas:
+        if (data == '('):
+            stack.append('(')
+        else: # )
+            if (len(stack) > 0):
                 stack.pop()
-    if (len(stack) == 0) :
+            else:
+                is_possible = False
+                break
+            
+    if (is_possible and not stack):
         print("YES")
-    else : 
+    else:
         print("NO")
