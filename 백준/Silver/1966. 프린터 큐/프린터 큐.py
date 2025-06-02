@@ -1,5 +1,4 @@
 import sys
-import heapq
 from collections import deque
 input = sys.stdin.readline
 
@@ -11,24 +10,24 @@ for _ in range(tc):
     input_data = list(map(int, input().split()))
     
     queue = deque()
-    heap = []
     
     for idx in range(N):
-        queue.append([idx, input_data[idx]])
-        heapq.heappush(heap, -input_data[idx])
-
+        queue.append([input_data[idx], idx])
+    
+    sorted_queue = deque(sorted(queue, reverse=True))
+    
     time = 1
-    while(heap and queue):
-        max_value = -heap[0]
-        idx, value = queue.popleft()
+    while(queue):
+        max_value = sorted_queue[0][0]
+        value, idx = queue.popleft()
 
         if (value == max_value): # 프린트
-            heapq.heappop(heap)
+            sorted_queue.popleft()
             if (idx == M):
                 print(time)
                 break
             else:
                 time += 1
         else: # 뒤로 넘김
-            queue.append([idx, value])
+            queue.append([value, idx])
                
