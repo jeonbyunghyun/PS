@@ -1,10 +1,9 @@
 import sys
 input = sys.stdin.readline
-from collections import deque
 
 N = int(input())
 
-dp = deque()
+dp = []
 dp.append(N)
 answer = 0
 while(1 not in dp):
